@@ -32,12 +32,12 @@
                             <label class="form-label">Pilih Lokasi</label>
                             <div class="d-flex gap-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="lokasi_type" id="lokasi_dapur" 
+                                    <input class="form-check-input" type="radio" name="lokasi_type" id="lokasi_dapur"
                                         value="dapur" {{ old('lokasi_type', $rantang ? ($rantang->lokasi_terakhir == 'Dapur' ? 'dapur' : 'lain') : '') == 'dapur' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="lokasi_dapur">Dapur</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="lokasi_type" id="lokasi_lain" 
+                                    <input class="form-check-input" type="radio" name="lokasi_type" id="lokasi_lain"
                                         value="lain" {{ old('lokasi_type', $rantang ? ($rantang->lokasi_terakhir == 'Dapur' ? 'dapur' : 'lain') : '') == 'lain' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="lokasi_lain">Lokasi Lain</label>
                                 </div>
@@ -53,8 +53,14 @@
 
                         <div class="mb-3">
                             <label for="pemegang_terakhir" class="form-label">Pemegang Terakhir</label>
-                            <input type="text" name="pemegang_terakhir" id="pemegang_terakhir" class="form-control"
-                                value="{{ old('pemegang_terakhir', $rantang ? $rantang->pemegang_terakhir : '') }}">
+                            <select name="pemegang_terakhir" id="pemegang_terakhir" class="form-control" required>
+                                <option value="">-- Pilih Pegawai --</option>
+                                @for($i = 1; $i <= 7; $i++)
+                                    <option value="Pegawai {{ $i }}" {{ old('pemegang_terakhir', $rantang ? $rantang->pemegang_terakhir : '') == "Pegawai {$i}" ? 'selected' : '' }}>
+                                        Pegawai {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -77,7 +83,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ asset('js/location-selection.js') }}"></script>
+        <script src="{{ asset('/public/js/location-selection.js') }}"></script>
 </body>
 </section>
 
